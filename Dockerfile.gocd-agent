@@ -1,6 +1,17 @@
-# Build using: docker build -f Dockerfile.gocd-agent -t gocd-agent .
+# Build using: docker build -f Dockerfile.gocd-agent -t 1c3m4n/go_agent .
 FROM phusion/baseimage:0.9.18
 MAINTAINER Joshua <potgieter.josh@gmail.com>
+
+# Let's start with some basic stuff.
+RUN apt-get update -qq && apt-get install -qqy \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    lxc \
+    iptables
+    
+# Install Docker from Docker Inc. repositories.
+RUN curl -sSL https://get.docker.com/ | sh
 
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
